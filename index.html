@@ -1,0 +1,233 @@
+<html>
+<title>VHDL PROGRAM</title>
+<head>
+<style type="text/css">
+     h1 {font-style: italic;
+	     font-size:50px;
+		 color:red;
+		 }
+     h2 {font-size:30px;
+	     color:#122478;
+	    }		 
+	h3 { color:red;
+	     font-style:italic;
+		 font-size:50px;
+		 margin:1px;
+	    }
+	 span { font-weight:bold;
+	         font-size:22px;
+	         color:black;
+	       }
+	 table{border:solid blue;}
+	 td{background-color:#F8E098;}
+	 
+	 a:link {color:red;
+		     text-decoration:none;}
+     a:visited{color:red; }
+	 a:hover{ background-color:#899BED;
+	           color:white;
+			   text-decoration:underline;
+			   font-weight:bold;
+	           }
+    
+	 p {font-style:script;
+	     font-size:18px;
+		 margin:2px;
+	    }
+	    
+</style>
+</head>
+
+<body>
+<pre class="tab">
+<h1>Quick Reference: Creating a Project in Quartus II</h1>
+<p>
+1. Create a Project: File->New Project
+a. NEVER, NEVER, NEVER save more than one project in the same folder!!!
+
+b. Save Projects on a thumbdrive or the Z: drive
+i. When saving your project do NOT use spaces or apostrophe’s in the file path. Saving to a location such as 
+E:\My Documents\Lab4 has been known to randomly cause mysterious errors.
+ii. Do not use the C:\ drive
+
+c. You may wish to use a previous project as a starting point instead of starting from scratch. In these cases do as follows:
+i. Open the project you wish to start from: File->Open Project
+ii. Copy the project: Project->Copy Project
+iii. Many of your project files may keep the name assigned in the original project. Example: Modifying Lab7 to build Lab8 
+may cause Lab8's executable to be named lab7.sof. This is not actually a bug. If your project does not work as expected, 
+the problem is something else.
+
+<img src="Capture1.png" height="300"/>
+2. Select the correct FPGA:
+a. Choose Cyclone II: EP2C35F672C6 as the device when creating the project OR
+
+b. Project Navigator (top left) -> Hierarchy
+i. If the device is Stratix: AUTO, Right-click->device and set it to
+Cyclone II: EP2C35F672C6
+
+3. Create a schematic: File->New->Block Schematic Diagram File .bdf
+a. Build the circuit for the project.
+
+4. Set your main schematic as the Top-Level-Entity
+a. Name your main schematic the same as the project name OR
+
+b. Project Navigator (top left) -> Files -> Right-click your main schematic 
+file ->Set as Top-Level-Entity
+
+5. Import Pin Assignments:
+a. Assignments->Import Assignments. Select DE2_pin_assignments.csv
+b. There is a copy of DE2_pin_assignments.csv in the Sophomore Lab folder on the Desktop
+
+6. Compile the Project: Click Purple arrow icon
+(Circled in Red)
+<img src="Capture.png" height='50'/>
+
+7. Program the Board: Click Program Icon (Circled in Blue)
+a. If it says No Hardware (upper left), do the following:
+i. Click Hardware Setup
+ii. Choose USB Blaster from the drop down menu where it says No
+Hardware
+iii. Click Close
+
+b. Click Start
+</p>
+
+<h2>WHAT IS VHDL</h2>
+<p>
+VHDL is generally used to write text models that describe a logic circuit. Such a model is processed by a synthesis program, 
+only if it is part of the logic design. A simulation program is used to test the logic design using simulation models to 
+represent the logic circuits that interface to the design. This collection of simulation models is commonly called a testbench.
+</p>
+
+<h2>Making an Inverter in VHDL</h2>
+<p>
+An inverter is a logic gate that converts a logic level on its input to the opposite logic level on its output, 
+i.e. a 0 on the input of an inverter will produce a 1 on its output; a 1 on the input of an inverter will produce a 0 
+in its output.
+
+Below is a listing of the VHDL code for the invert VHDL project and an explanation of various elements in the code.
+This is followed by information on how to create the project using the Xilinx tools.
+
+The VHDL code for creating an inverter is as follows, this is the code from the invert_top.vhd file:
+</p>
+<table border='1'>
+<td>
+<pre class="tab">
+ library IEEE;
+ use IEEE.STD_LOGIC_1164.ALL;
+
+ entity invert_top is
+     Port ( PB : in  STD_LOGIC;
+            LED : out  STD_LOGIC);
+ end invert_top;
+
+ architecture Behavioral of invert_top is
+ begin
+     -- invert the signal from the push button switch and route it to the LED  
+     LED <= not PB;
+ end Behavioral;
+ </pre>
+</td>
+</table>
+
+<h3>VHDL Elements</h3>
+<h2>Library Files</h2>
+<p>
+<span>invert_top.vhd</span> contains the following statements at the top of the file:
+</p>
+<table border='1'>
+<td>
+<pre class="tab">
+ library IEEE;
+ use IEEE.STD_LOGIC_1164.ALL;
+</pre>
+</td>
+</table>
+<p>
+This includes the IEEE library in the VHDL design and specifies that all of the STD_LOGIC_1164 library package 
+from the IEEE library will be used.
+</p>
+<h2>VHDL File and Entity Name</h2>
+<p>
+The <span>entity</span> describes the pins (or ports) used in the design:
+</p>
+<table border='1'>
+<td>
+<pre class="tab">
+ entity invert_top is
+     Port ( PB : in  STD_LOGIC;
+            LED : out  STD_LOGIC);
+ end invert_top;
+</pre>
+</td>
+</table>
+<p>
+The above statements define an input pin called PB (our push-button switch) and an output pin called LED (this will 
+connect to one of the LEDs on the board).
+
+The entity name in the VHDL file (invert_top.vhd in our example) has the same name as the VHDL file. In this example 
+the entity name and file name are both invert_top.
+
+The name invert_top was chosen for this project but could be named anything else. When a new VHDL file is added to the
+project in the Xilinx software, it will automatically create the entity code in the file and name it after the chosen file name.
+
+VHDL files end with a .vhd file extension.
+</p>
+<h2>VHDL Architecture</h2>
+<p>
+The <span>architecture</span> describes the circuit functionality. This is where the actual logic design is written in VHDL:
+</p>
+<table border='1'>
+<td>
+<pre class="tab">
+ architecture Behavioral of invert_top is
+ begin
+     -- invert the signal from the push button switch and route it to the LED  
+     LED <= not PB;
+ end Behavioral;
+</pre>
+</td>
+</table>
+<h2>VHDL Comments</h2>
+<p>
+VHDL comments are started with two minus signs next to each other: --
+
+Comments in the VHDL file are ignored by the software tools and allow the writer of the VHDL to include human readable 
+comments and explanations in the VHDL file.
+</p>
+<h2>Semicolons and Case</h2>
+<p>
+Every VHDL statement must be terminated by a semicolon: <span>; </span>
+
+VHDL is not case sensitive so keywords and statements can be written in upper or lower case letters.
+</p>
+<h2>An Explanation of the VHDL Code</h2>
+<p>
+The actual VHDL code that describes the inverter is the single VHDL statement in the architecture part of the VHDL file:
+</p>
+<table border='1'>
+<td>
+<pre class="tab">
+  LED <= not PB; 
+</pre>  
+</td>
+</table>
+<p>
+This statement basically says "Invert the PB input pin and put the inverted result on the LED pin.
+The schematic equivalent of this statement is shown below.
+
+<img src="vhdl.png" height='250'/>
+
+The above code inverts the logic level on the PB pin by using the VHDL not keyword. It then assigns the inverted 
+logic level to the LED pin using the VHDL assignment operator <= which places the inverted value on the LED pin.
+</p>
+</pre>
+
+<h2>VHDL Code:</h2>
+</br>
+<a href="second.html">ALL LOGIC GATES VHDL CODES</a>
+	 
+ <br />
+</table>
+</body>
+</html>
