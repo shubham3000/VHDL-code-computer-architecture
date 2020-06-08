@@ -24,7 +24,14 @@
 	 span {color:#2E18B7;
 	       font-weight:bold;
 	       }
-	 
+	 a:link {color:red;
+		     text-decoration:none;}
+     a:visited{color:red; }
+	 a:hover{ background-color:#899BED;
+	           color:white;
+			   text-decoration:underline;
+			   font-weight:bold;
+	           }
 </style>
 </head>
 
@@ -260,6 +267,75 @@ DIAGRAM:
 <img src='XOR-gate-graphical-symbol-and-implementation.png' height="300" />
 </br>
 XOR gate graphical symbol and implementation
+<br/>
+<br/>
+<br/>
+<div> NOR GATE</div>
+</br>
+</br>
+</br>
+VHDL CODE:
+</br>
+<table border="1">
+<td>
+<pre class="tab">
+ library ieee;
+ use ieee.std_logic_1164.all;
 
+ entity norgate is
+ port(
+      a,b: in std_logic;
+	  c: out std_logic
+	  );
+ end entity norgate;
+
+ architecture behaviour of norgate is 
+ begin
+       c < = a nor b;
+ end architecture behaviour;
+</pre>
+</td>
+</table>
+</br>
+DIAGRAM:
+</br>
+<img src='nor-gate.jpg' height="200" />
+</br>
+</br>
+Another form of code for xor gate
+<table border="1">
+<td>
+<pre class="tab">
+ library ieee;
+ use ieee.std_logic_1164.all;
+
+ entity norgate is
+ port(
+      a,b: in std_logic;
+	  c: out std_logic
+	  );
+ end entity norgate;
+
+ architecture behaviour of norgate is 
+ begin
+       c < = (not(a or b));  
+ end architecture behaviour;
+</pre>
+</td>
+</table>
+<br />
+DIAGRAM:
+</br>
+</br>
+<img src='nor-gate-implementation.jpg' height="100" />
+</br>
+</br>
+</br>
+</br>
+<h2>More VHDL Code:</h2>
+<a href="index.html">INTRODUCTION VHDL CODES</a>
+</br>
+</br>
+<a href="third.html">ADDER AND SUBTRACTOR VHDL CODES</a>
 </body>
 </html>
