@@ -1,7 +1,7 @@
 # VHDL-code-computer-architecture
 VHDL codes
 
-1)installation process and how to create a file
+1)Installation process and how to create a file
 
 2)All logic gates
 
