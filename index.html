@@ -2,20 +2,18 @@
 <title>VHDL PROGRAM</title>
 <head>
 <style type="text/css">
-     h1 {font-style: italic;
-	     font-size:50px;
-		 color:red;
-		 }
+    
      h2 {font-size:30px;
 	     color:#122478;
+		 margin: 0px;
 	    }		 
-	h3 { color:red;
+	h1 { color:red;
 	     font-style:italic;
 		 font-size:50px;
-		 margin:1px;
+		 margin:0px;
 	    }
 	 span { font-weight:bold;
-	         font-size:22px;
+	         font-size:18px;
 	         color:black;
 	       }
 	 table{border:solid blue;}
@@ -30,7 +28,7 @@
 			   font-weight:bold;
 	           }
     
-	 p {font-style:script;
+	 p {font: normal 16px Arial, Halvetica, Sans-serif;
 	     font-size:18px;
 		 margin:2px;
 	    }
@@ -78,7 +76,7 @@ The VHDL code for creating an inverter is as follows, this is the code from the 
 </td>
 </table>
 
-<h3>VHDL Elements</h3>
+<h1>VHDL Elements</h1>
 <h2>Library Files</h2>
 <p>
 <span>invert_top.vhd</span> contains the following statements at the top of the file:
@@ -95,6 +93,7 @@ The VHDL code for creating an inverter is as follows, this is the code from the 
 This includes the IEEE library in the VHDL design and specifies that all of the STD_LOGIC_1164 library package 
 from the IEEE library will be used.
 </p>
+
 <h2>VHDL File and Entity Name</h2>
 <p>
 The <span>entity</span> describes the pins (or ports) used in the design:
@@ -121,6 +120,7 @@ project in the Xilinx software, it will automatically create the entity code in 
 
 VHDL files end with a .vhd file extension.
 </p>
+
 <h2>VHDL Architecture</h2>
 <p>
 The <span>architecture</span> describes the circuit functionality. This is where the actual logic design is written in VHDL:
@@ -136,6 +136,7 @@ The <span>architecture</span> describes the circuit functionality. This is where
 </pre>
 </td>
 </table>
+
 <h2>VHDL Comments</h2>
 <p>
 VHDL comments are started with two minus signs next to each other: --
@@ -143,12 +144,14 @@ VHDL comments are started with two minus signs next to each other: --
 Comments in the VHDL file are ignored by the software tools and allow the writer of the VHDL to include human readable 
 comments and explanations in the VHDL file.
 </p>
+
 <h2>Semicolons and Case</h2>
 <p>
 Every VHDL statement must be terminated by a semicolon: <span>; </span>
 
 VHDL is not case sensitive so keywords and statements can be written in upper or lower case letters.
 </p>
+
 <h2>An Explanation of the VHDL Code</h2>
 <p>
 The actual VHDL code that describes the inverter is the single VHDL statement in the architecture part of the VHDL file:
@@ -180,8 +183,9 @@ logic level to the LED pin using the VHDL assignment operator <= which places th
 </br>
 </br>
 <a href="third.html">ADDER AND SUBTRACTOR VHDL CODES</a>
-	 
- <br />
+</br>
+</br>
+<a href="mux.html">MULTIPLEXER AND DEMULTIPLEXER VHDL CODE</a>
 </table>
 </body>
 </html>
