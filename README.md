@@ -6,3 +6,5 @@ VHDL codes
 2)All logic gates
 
 3)Adder and subtractor
+
+4)Multiplexer and Demultiplexer
