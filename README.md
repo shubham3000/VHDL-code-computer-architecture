@@ -8,3 +8,5 @@ VHDL codes
 3)Adder and subtractor
 
 4)Multiplexer and Demultiplexer
+
+5)4-bit Shift register
