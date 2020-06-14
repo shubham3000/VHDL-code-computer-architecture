@@ -1,0 +1,279 @@
+<html>
+<title>VHDL Code for 4-Bit Shift Register</title>
+<head>
+<style type="text/css">
+ div {border:2px solid red;
+	       position: absolute;
+		   width:65px;
+		   font-style: bold;
+		   font-size:25px;
+		   color:#C15F2F;
+		   background-color:#F4F883;
+		   }
+ h1 { font-style:italic;
+	      font-size:70px;
+		  color:#800000;
+		  text-align:center;
+	       }
+ h2{ font-style:bold;
+	     color:#3587EA;
+	    }
+p {font: normal 16px Arial, Halvetica, Sans-serif;
+	     font-size:18px;
+		 margin:2px;
+	    }
+		
+table{border:solid blue;}
+td{background-color:#F8E098;}
+
+a:link {color:red;
+		     text-decoration:none;}
+     a:visited{color:red; }
+	 a:hover{ background-color:#899BED;
+	           color:white;
+			   text-decoration:underline;
+			   font-weight:bold;
+	           }
+span { color: red;
+      }
+			   
+</style>
+</head>
+<body>
+<h1>VHDL Code for 4-Bit Shift Register</h1>
+<h2>Shift Register</h2>
+<pre class="tab">
+<p>VHDL Code for shift register can be categorised in serial in serial out shift register, serial in parallel out shift register,
+parallel in parallel out shift register and parallel in serial out shift register.</p>
+</pre>
+<h2>Parallel In -- Parallel Out Shift Registers <span>(PIPO)</span></h2>
+<pre class="tab">
+<p>The shift register, which allows parallel input (data is given separately to each flip flop and in a simultaneous manner) 
+and also produces a parallel output is known as Parallel-In parallel-Out shift register.
+
+The logic circuit given below shows a parallel-in-parallel-out shift register. The circuit consists of four D flip-flops which
+are connected. The clear (CLR) signal and clock signals are connected to all the 4 flip flops. In this type of register, there
+are no interconnections between the individual flip-flops since no serial shifting of the data is required. Data is given as 
+input separately for each flip flop and in the same way, output also collected individually from each flip flop.</p>
+<img src="images/pipo.jpg" height="300">
+<p>A Parallel in Parallel out (PIPO) shift register is used as a temporary storage device and like SISO Shift register it acts
+as a delay element.</p>
+</pre>
+</br>
+<div> PIPO </div>
+</br>
+</br>
+</br>
+VHDL CODE:
+</br>
+</br>
+<table border="1">
+<td>
+<pre class="tab">
+library ieee;
+use ieee.std_logic_1164.all;
+ 
+entity pipo is
+port(
+     clk : in std_logic;
+     D: in std_logic_vector(3 downto 0);
+     Q: out std_logic_vector(3 downto 0)   
+ );
+end pipo;
+ 
+architecture behaviour of pipo is
+begin
+     process (clk)
+begin
+     if (CLK event and CLK = '1') then
+     Q < = D;
+     end if;
+     end process;
+ 
+end architecture behaviour;
+ 
+</pre>
+</td>
+</table>
+</br>
+<h2>Serial In -- Parallel Out Shift Registers <span>(SIPO)</span></h2>
+<pre class="tab">
+<p>The shift register, which allows serial input (one bit after the other through a single data line) and produces a parallel output
+is known as Serial-In Parallel-Out shift register.
+
+The logic circuit given below shows a serial-in-parallel-out shift register. The circuit consists of four D flip-flops which are
+connected. The clear (CLR) signal is connected in addition to the clock signal to all the 4 flip flops in order to RESET them. 
+The output of the first flip flop is connected to the input of the next flip flop and so on. All these flip-flops are synchronous
+with each other since the same clock signal is applied to each flip flop. </p>
+<img src="images/sipo.jpg" height="300">
+<p>The above circuit is an example of shift right register, taking the serial data input from the left side of the flip flop 
+and producing a parallel output. They are used in communication lines where demultiplexing of a data line into several parallel
+lines is required because the main use of the SIPO register is to convert serial data into parallel data.</p>
+</pre>
+</br>
+<div> SIPO </div>
+</br>
+</br>
+</br>
+VHDL CODE:
+</br>
+</br>
+<table border="1">
+<td>
+<pre class="tab">
+library ieee;
+use ieee.std_logic_1164.all;
+ 
+entity sipo is
+port(
+     clk, clear : in std_logic;
+     Input_Data: in std_logic;
+     Q: out std_logic_vector(3 downto 0) );    
+end sipo; 
+ 
+architecture behaviour of sipo is
+begin
+     process (clk)
+begin
+     if clear = '1' then
+     Q < = "0000";
+     elsif (CLK event and CLK='1') then
+     Q(3 downto 1) < = Q(2 downto 0);
+     Q(0) < = Input_Data;
+     end if;
+     end process;
+end architecture behaviour;
+
+</pre>
+</td>
+</table>
+</br>
+<h2>Parallel In -- Serial Out shift register <span>(PISO)</span></h2>
+<pre class="tab">
+<p>The shift register, which allows parallel input (data is given separately to each flip flop and in a simultaneous manner) and
+produces a serial output is known as Parallel-In Serial-Out shift register.
+
+The logic circuit given below shows a parallel-in-serial-out shift register. The circuit consists of four D flip-flops which are 
+connected. The clock input is directly connected to all the flip flops but the input data is connected individually to each flip
+flop through a multiplexer at the input of every flip flop. The output of the previous flip flop and parallel data input are 
+connected to the input of the MUX and the output of MUX is connected to the next flip flop. All these flip-flops are synchronous
+with each other since the same clock signal is applied to each flip flop.</p>
+<img src="images/piso.jpg" height="400">
+<p>A Parallel in Serial out (PISO) shift register us used to convert parallel data to serial data.</p>
+</pre>
+</br>
+<div> PISO </div>
+</br>
+</br>
+</br>
+VHDL CODE:
+</br>
+</br>
+<table border="1">
+<td>
+<pre class="tab">
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+
+entity piso is
+     port(
+         clk : in STD_LOGIC;
+         reset : in STD_LOGIC;
+         load : in STD_LOGIC;
+         din : in STD_LOGIC_VECTOR(3 downto 0);
+         dout : out STD_LOGIC
+         );
+end piso;
+
+architecture behavioral of piso is
+begin
+     piso : process (clk,reset,load,din) is
+     variable temp : std_logic_vector (din'range);    
+begin
+     if (reset='1') then
+         temp := (others=>'0');
+     elsif (load='1') then
+         temp := din ;
+     elsif (rising_edge (clk)) then
+         dout <= temp(3);
+         temp := temp(2 downto 0) & '0';
+     end if;
+    end process piso;
+
+end architecture behaviour;
+
+</pre>
+</td>
+</table>
+</br>
+<h2>Serial In -- Serial Out shift register <span>(SISO)</span></h2>
+<pre class="tab">
+<p>The shift register, which allows serial input (one bit after the other through a single data line) and produces a serial 
+output is known as Serial-In Serial-Out shift register. Since there is only one output, the data leaves the shift register 
+one bit at a time in a serial pattern, thus the name Serial-In Serial-Out Shift Register.
+
+The logic circuit given below shows a serial-in serial-out shift register. The circuit consists of four D flip-flops which 
+are connected in a serial manner. All these flip-flops are synchronous with each other since the same clock signal is applied
+to each flip flop.</p>
+<img src="images/siso.jpg" height="300">
+<p>The above circuit is an example of shift right register, taking the serial data input from the left side of the flip flop. 
+The main use of a SISO is to act as a delay element.</p>
+</pre>
+</br>
+<div> SISO </div>
+</br>
+</br>
+</br>
+VHDL CODE:
+</br>
+</br>
+<table border="1">
+<td>
+<pre class="tab">
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity siso is
+Port ( 
+     si : in  STD_LOGIC;
+     clk : in  STD_LOGIC;
+     so : out  STD_LOGIC);
+end siso;
+
+architecture Behavioral of siso is
+
+signal temp : std_logic_vector(3 downto 0);   
+
+begin
+     process(clk)
+begin
+     if(clk'event and clk ='1')then
+     temp <= si & temp(3 downto 1);
+     end if;
+     end process;
+     so <= temp(0);
+end architecture behavioral;
+
+</pre>
+</td>
+</table>
+</br>
+</br>
+</br>
+<h2>More VHDL Code:</h2>
+<a href="instal.html">HOW TO INSTALL QUARTUS-II AND CREATE NEW FILE</a>
+</br>
+</br>
+<a href="index.html">INTRODUCTION VHDL CODES</a>
+</br>
+</br>
+<a href="second.html">ALL LOGIC GATES VHDL CODES</a>
+</br>
+</br>
+<a href="third.html">ADDER AND SUBTRACTOR VHDL CODES</a>
+</br>
+</br>
+<a href="mux.html">MULTIPLEXER AND DEMULTIPLEXER VHDL CODE</a>
+
+</body>
+</html>
