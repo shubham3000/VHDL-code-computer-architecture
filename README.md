@@ -10,3 +10,5 @@ VHDL codes
 4)Multiplexer and Demultiplexer
 
 5)4-bit Shift register
+
+6)4-bit ALU
